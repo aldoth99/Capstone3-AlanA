@@ -32,4 +32,44 @@ Bagi calon pembeli, waktu yang mereka habiskan dalam membandingkan harga juga ak
 
 Perusahaan yang menjual mobil bekas harus memiliki model bisnis yang baik untuk menentukan harga yang sesuai dan akurat, karena spesifikasi dan kondisi mobil bekas yang beragam. Model bisnis yang baik dalam menentukan harga akan membuat calon pembeli atau pelanggan semakin tertarik pada perusahaan, dan memberikan kenyamanan bagi mereka dalam menentukan spesifikasi dan harga yang diinginkan. Keakuratan harga dan kenyamanan ini dapat meningkatkan minat pelanggan untuk berbelanja di perusahaan, dan tentu saja akan memperkuat posisi finansial perusahaan.
 
+## **Goals**
+
+Untuk mengatasi masalah yang ada, perusahaan Syarah.com membutuhkan alat yang dapat membantu calon pembeli menentukan mobil yang mereka inginkan dengan melihat spesifikasi dan harga yang akurat. Variabel spesifikasi seperti merek mobil, tahun pembuatan, jarak tempuh dan lain-lain harus diperhitungkan untuk menentukan harga yang akurat. Dengan begitu, harga mobil dapat bersaing di pasaran dan perusahaan dapat memperoleh keuntungan yang maksimal.
+
+
+####**Setelah memperoleh model optimal untuk dataset ini, dapat disimpulkan bahwa:**
+
+1. Model optimal yang dipilih adalah Random Forest Regressor (sebelum hyper parameter tunning) dimana dari model ini menghasilkan score:
+- **RSME: 18544.323207**
+- **MAE:	11601.684861**
+-**MAPE;	0.216333**
+- **R-Square = 0.779479**
+
+2. Hasil model Random Forest Regression ketika tunning meruubah parameter default menjadi:
+* **model__min_samples_leaf : 2**
+* **max_depth : 8**
+* **n_estimators : 200**
+
+*Namun yang dipilih adalah model default dikarenakan model menurun performanya setelah dilakukan hyperparameter tuning.*
+
+3. Variabel target "Price" yang memiliki nilai 0 tidak digunakan dalam pemodelan karena bersifat nego karena dalam Machine Learning kita membutuhkan angka yang pasti.
+Berdasarkan Evaluasi Matriks, model ini memiliki kesalahan sekitar 11601 SAR (dari MAE) atau 21% (dari MAPE) prediksi akan menyimpang.
+
+####**Batasan atau limitasi model model, yaitu:**
+
+- Semakin sedikit merek mobil yang dijual, model akan semakin sulit untuk memprediksi harga.
+- Untuk mobil yang ingin dijual di bawah 10k SAR atau mobil dengan harga diatas 183125 SAR, model ini tidak cocok untuk digunakan.
+- Model diatas tidak cocok untuk mobil keluaran tahun 2005 kebawah.
+- Model ini dapat diimporvisasi agar menghasilkan prediksi yang lebih baik lagi, namun kita dapat melakukan A/B testing terhadap model yang sudah dibuat ini untuk mengetahui tingkat efektivitas penggunaan model terhadap peningkatan jumlah penjualan mobil bekas ini. Nantinya, dari hasil A/B testing kita akan mendapatkan insight lain terkait hal apa saja yang dapat diperbaiki pada model.
+
+### **Untuk memperbaiki hasil prediksi, beberapa hal yang dapat dilakukan adalah:**
+
+1. Menilai dan membagi error yang muncul ke dalam dua kategori, overestimasi dan underestimasi. Selanjutnya, memeriksa bagaimana error tersebut terkait dengan setiap variabel bebas. Ini akan membantu mengungkap aspek dan faktor-faktor yang menyebabkan tingginya error dan memberikan peluang untuk melakukan ulang modeling dengan menggunakan teknik perbaikan fitur yang berbeda.
+2. Menambahkan sumber data agar model memiliki lebih banyak informasi untuk dipelajari, yaitu dengan menambahkan data teraktual tentang mobil bekas di Arab Saudi.
+3. Menambahkan fitur yang memiliki korelasi dengan harga mobil, seperti kondisi mobil, garansi resmi, dan lain-lain.
+4. Menentukan perbedaan antara mobil yang dikategorikan sebagai klasik dan mobil biasa yang digunakan untuk keperluan sehari-hari, karena hal ini akan mempengaruhi kaitan antara price dan mileage. Contohnya, sebuah mobil tahun 1980 akan memiliki harga yang lebih tinggi dibandingkan dengan mobil tahun 2007, tetapi membutuhkan pengetahuan domain untuk mengkategorikan mobil sebagai klasik.
+5. Menyatakan opsi untuk membuat model tersendiri bagi mobil mewah atau fokus pada penjualan mobil biasa untuk kebutuhan sehari-hari, karena kehadiran data mobil mewah dapat memberikan dampak signifikan terhadap model.
+6. Penambahan jumlah data perlu diberikan perhatian pada merek mobil yang sedikit jumlahnya dan harganya mahal. Sedikitnya jumlah data sangat mempengaruhi hasil model akhir yang diperoleh untuk sedikitnya merek mobil.
+7. Pada masa depan, model ini perlu dibantu oleh model klasifikasi yang memiliki variabel target adalah penjualan yang "menguntungkan atau tidak" berdasarkan nilai harga mobil yang telah terjual.
+
 
